@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block nav_check_active %}active{% endblock %}
+
+{% block title %}
+    信息查询
+{% endblock %}
+
+{% csrf_token %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-6 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">相似性</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% csrf_token %}
+                        <form action="{% url 'xinxi_check' %}" method="POST">
+                            {% csrf_token %}
+                            <label>请输入查重内容</label>
+                            <textarea style="width: 500px;height: 300px" type="text" name="guanjianzi"></textarea>
+                            <button type="submit" class="btn btn-primary">查询</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-6 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">相似查询结果</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>相似文章标题：《{{ name }}》 <br /> </h3>
+                                <h5>相似度：{{ num }}</h5>
+                            </div>
+                            <div class="panel-body">
+                                {{ content }}
+                                <h5>----------------------<br/>相似度超过20%的片段</h5>
+                                {% for n,p in par %}
+                                <h5 style="color: red">{{ p }} <br/> ------相似度：{{ n }}</h5>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>当前文章</h3>
+                            </div>
+                            <div class="panel-body">
+                                {{ text }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    信息列表
+{% endblock %}
+
+{% block nav_blog_active %}active{% endblock %}
+
+{% load staticfiles  %}
+{% block header_extends %}
+    <link rel="stylesheet" href="{% static 'xinxi.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {% block blog_list_title %}信息列表(一共有{{ xinxis|length }}条信息){% endblock %}
+                    </div>
+                    <div class="panel-body">
+                        {% for id, xinxi in xinxis %}
+                            <div class="blog">
+                                <h3><a href=" {% url 'xinxi_detail' id%}">{{ xinxi }}</a></h3>
+                                <p class="blog-info">
+
+                                </p>
+                            </div>
+                         {% empty %}
+                            <div class="blog">
+                                <h3>暂无信息</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        信息分类
+                    </div>
+                    <div class="panel-body">
+                        <ul class="blog-types" >
+                            {% for  type_id,type_name in type %}
+                                <h4><a href="{% url 'xinxi_type' type_id %}"> {{ type_name }}</a></h4>
+                            {% empty %}
+                                <li>暂无分类</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+

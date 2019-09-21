@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+    信息查询
+{% endblock %}
+
+{% block nav_query_active %}active{% endblock %}
+{% csrf_token %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-6 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">查询</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% csrf_token %}
+                        <form action="{% url 'xinxi_query' %}" method="POST">
+                            {% csrf_token %}
+                            <label>请输入查询条件</label>
+                            <input type="text" name="guanjianzi">
+                            <button type="submit" class="btn btn-primary">查询</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-6 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">查询结果</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for id, xinxi in xinxis %}
+                            <div class="blog">
+                                <h3><a href=" {% url 'xinxi_detail' id%}">{{ xinxi }}</a></h3>
+                                <p class="blog-info">
+
+                                </p>
+                            </div>
+                         {% empty %}
+                            <div class="blog">
+                                <h3>暂无信息</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+

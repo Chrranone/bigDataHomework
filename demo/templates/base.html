@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap3.37/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'jquery1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap3.37/js/bootstrap.min.js' %}"></script>
+
+    {% block header_extends %}{% endblock %}
+
+
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class = "navbar-brand"  href="{% url 'xinxi_list'  %}">热词网站</a>
+            </div>
+            <ul class="nav navbar-nav">
+
+                <li class="{% block nav_blog_active %}{% endblock %}"><a href="{% url 'xinxi_list' %}">信息列表</a></li>
+
+                <li class="{% block nav_query_active %}{% endblock %}"><a href="{% url 'xinxi_query' %}">信息查询</a></li>
+                <li class="{% block nav_check_active %}{% endblock %}"><a href="{% url 'xinxi_check' %}">相似度查询</a></li>
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+
+            </ul>
+
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

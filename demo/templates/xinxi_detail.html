@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    信息详情
+{% endblock %}
+
+{% block nav_blog_active %}active{% endblock %}
+
+{% load staticfiles  %}
+{% block header_extends %}
+    <link rel="stylesheet" href="{% static 'xinxi.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-9 col-sm-offset-1">
+
+                <div class="panel panel-default">
+                    {% for name, content in xinxi %}
+                  <div class="panel-heading">
+                        <h3>{{ name }}</h3>
+                  </div>
+                  <div class="panel-body">
+                      {{ content }}
+                  </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
